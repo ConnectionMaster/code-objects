@@ -1,0 +1,25 @@
+{
+    "name": "deviscoding/code-objects",
+    "description": "PHP Library for managing code objects and strings.",
+    "type": "library",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "AMJones",
+            "email": "am@jonesiscoding.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DevCoding\\CodeObject\\Exception\\": "src/Exception",
+            "DevCoding\\CodeObject\\Object\\": "src/Object",
+            "DevCoding\\CodeObject\\Resolver\\": "src/Resolver"
+        }
+    },
+    "version": "1.0",
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*",
+        "psr/container": "^1.0|^2.0"
+    }
+}
