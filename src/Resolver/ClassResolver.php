@@ -100,6 +100,23 @@ class ClassResolver
     }
   }
 
+  /**
+   * Returns all classes hinted by the namespaces given at the instantiation of in this ClassResolver.
+   *
+   * @return array
+   */
+  public function all()
+  {
+    $aClasses = [];
+    foreach ($this->namespaces as $namespace)
+    {
+      $nClasses = $this->getClassesInNamespace($namespace);
+      $aClasses = array_merge($aClasses, $nClasses);
+    }
+
+    return array_unique($aClasses);
+  }
+
   // endregion ///////////////////////////////////////////// Public Methods
 
   // region //////////////////////////////////////////////// Helper Methods
