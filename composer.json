@@ -16,7 +16,7 @@
             "DevCoding\\CodeObject\\Resolver\\": "src/Resolver"
         }
     },
-    "version": "1.0.1",
+    "version": "1.1",
     "require": {
         "php": ">=7.0",
         "ext-json": "*",

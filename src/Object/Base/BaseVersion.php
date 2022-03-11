@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace DevCoding\CodeObject\Object\Version;
+namespace DevCoding\CodeObject\Object\Base;
 
 /**
  * Object class representing a semantic software version.
@@ -19,7 +19,7 @@ namespace DevCoding\CodeObject\Object\Version;
  *
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/code-object/blob/main/LICENSE
- * @package DevCoding\CodeObject\Object\Version
+ * @package DevCoding\CodeObject\Object\Base
  */
 abstract class BaseVersion
 {

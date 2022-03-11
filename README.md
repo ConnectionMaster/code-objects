@@ -5,6 +5,10 @@ code construct strings such as class names, method names, CSS classes, HTML5 ids
 Using this library?  I'd love to hear about it! Star the repo, or mention [@jonesiscoding](https://twitter.com/jonesiscoding/)
 in a tweet!
 
+## Version Objects
+
+There are two version objects designed for parsing and comparing Semantic Version numbers, `Version` and `VersionImmutable`.
+
 ## Construct Objects
 
 There are three main construct objects: `ConstructString`, `ClassString` and `MethodString`.  Both `ClassString` and

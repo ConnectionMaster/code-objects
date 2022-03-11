@@ -8,7 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace DevCoding\CodeObject\Object\Version;
+namespace DevCoding\CodeObject\Object;
+
+use DevCoding\CodeObject\Object\Base\BaseVersion;
 
 /**
  * Mutable object class representing a semantic software version, adding setter methods to BaseVersion.
@@ -19,7 +21,7 @@ namespace DevCoding\CodeObject\Object\Version;
  *
  * @author  AMJones <am@jonesiscoding.com>
  * @license https://github.com/jonesiscoding/code-object/blob/main/LICENSE
- * @package DevCoding\CodeObject\Object\Version
+ * @package DevCoding\CodeObject\Object
  */
 class Version extends BaseVersion
 {
