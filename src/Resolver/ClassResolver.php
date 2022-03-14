@@ -24,6 +24,8 @@ class ClassResolver
   protected $namespaces;
   /** @var string|null */
   protected $projectDir;
+  /** @var array */
+  protected $autoload;
 
   /**
    * @param string[]|object[] $namespaces_or_siblings Namespaces or siblings to resolve non-fully qualified classes
@@ -136,7 +138,7 @@ class ClassResolver
     {
       foreach (glob($dir.'/*.php') as $file)
       {
-        $fqcn = $namespace.'\\'.str_replace('.php', '', $file);
+        $fqcn = $namespace.'\\'.basename($file,".php");
 
         if (class_exists($fqcn))
         {
@@ -158,13 +160,69 @@ class ClassResolver
     $dir = $this->getProjectDir();
     if (is_dir($dir))
     {
-      $composerJsonPath = $this->getProjectDir().'/composer.json';
-      $composerConfig   = json_decode(file_get_contents($composerJsonPath));
-
-      return (array) $composerConfig->autoload->{'psr-4'};
+      return $this->getAutoload();
     }
 
     return [];
+  }
+
+  /**
+   *
+   * @return array
+   */
+  protected function getAutoload()
+  {
+    if (!isset($this->autoload))
+    {
+      try
+      {
+        $projectDir     = $this->getProjectDir();
+        $composer       = $projectDir.'/vendor/composer';
+        $autoloaders    = [$composer.'/autoload_psr4.php', $composer.'/autoload_namespaces.php'];
+        $this->autoload = [];
+
+        foreach ($autoloaders as $autoloader)
+        {
+          if (file_exists($autoloader))
+          {
+            $autoload = include_once $autoloader;
+            foreach ($autoload as $ns => $dirs)
+            {
+              foreach ($dirs as $dir)
+              {
+                $this->autoload[$dir] = rtrim($ns, "\\");
+              }
+            }
+          }
+        }
+
+        foreach ($this->autoload as $dir => $ns)
+        {
+          if (is_dir($dir))
+          {
+            $rii = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir));
+            foreach ($rii as $file) {
+              if ($file->isDir())
+              {
+                $path = rtrim($file->getPathname(), "/.");
+                $subNs = preg_replace("#^".$dir."(.*)$#", '$1', $path);
+                $subNs = str_replace("/", "\\", $subNs);
+                if (!empty($subNs))
+                {
+                  $this->autoload[$path] = $ns.$subNs;
+                }
+              }
+            }
+          }
+        }
+      }
+      catch (\Exception $e)
+      {
+        $this->autoload = [];
+      }
+    }
+
+    return $this->autoload;
   }
 
   /**
@@ -178,11 +236,11 @@ class ClassResolver
   {
     $defined = $this->getDefinedNamespaces();
 
-    foreach ($defined as $ns => $dir)
+    foreach ($defined as $dir => $ns)
     {
-      if ($ns == $namespace)
+      if ($namespace == $ns)
       {
-        return $this->getProjectDir().$dir;
+        return $dir;
       }
     }
 
@@ -198,7 +256,7 @@ class ClassResolver
   {
     if (!isset($this->namespaces))
     {
-      $this->namespaces = $this->getDefinedNamespaces();
+      $this->namespaces = array_values($this->getDefinedNamespaces());
     }
 
     return $this->namespaces;
