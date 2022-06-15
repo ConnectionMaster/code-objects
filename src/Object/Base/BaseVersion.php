@@ -10,6 +10,8 @@
 
 namespace DevCoding\CodeObject\Object\Base;
 
+use DevCoding\CodeObject\Helper\StringHelper;
+
 /**
  * Object class representing a semantic software version.
  *
@@ -391,6 +393,6 @@ abstract class BaseVersion
    */
   public function isStringable($val)
   {
-    return is_scalar($val) || is_object($val) && method_exists($val, '__toString');
+    return StringHelper::create()->isStringable($val);
   }
 }

@@ -13,10 +13,11 @@
         "psr-4": {
             "DevCoding\\CodeObject\\Exception\\": "src/Exception",
             "DevCoding\\CodeObject\\Object\\": "src/Object",
-            "DevCoding\\CodeObject\\Resolver\\": "src/Resolver"
+            "DevCoding\\CodeObject\\Resolver\\": "src/Resolver",
+            "DevCoding\\CodeObject\\Helper\\": "src/Helper"
         }
     },
-    "version": "1.2.1",
+    "version": "1.3",
     "require": {
         "php": ">=7.0",
         "ext-json": "*",
