@@ -1,6 +1,8 @@
 <?php
 
-namespace DevCoding\CodeObject\Object;
+namespace DevCoding\CodeObject\Helper;
+
+use DevCoding\CodeObject\Object\RegexMatch;
 
 /**
  * Object representing a Regular Expression Pattern
