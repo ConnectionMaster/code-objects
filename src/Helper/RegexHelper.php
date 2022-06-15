@@ -12,7 +12,7 @@ use DevCoding\CodeObject\Object\RegexMatch;
  *
  * @package DevCoding\CodeObject\Object
  */
-class Regex
+class RegexHelper
 {
   protected $pattern;
   /** @var \Closure|null */
