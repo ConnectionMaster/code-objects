@@ -249,7 +249,7 @@ abstract class BaseVersion
    */
   protected function compare(BaseVersion $v1, BaseVersion $v2)
   {
-    if ($v1->getRaw() === $v1->getRaw())
+    if ($v1->getRaw() === $v2->getRaw())
     {
       // For identical raw strings, consider them equal
       return 0;
